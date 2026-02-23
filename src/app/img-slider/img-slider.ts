@@ -1,31 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-
-interface Product {
-  id: number;
-  title: string;
-  price: number;
-  quantity: number;
-  total: number;
-  thumbnail: string;
-}
-
-interface Cart {
-  id: number;
-  discountedTotal: number;
-  total: number;
-  totalProducts: number;
-  totalQuantity: number;
-  userId: number;
-  products: Product[];
-}
-
-interface ApiResponse {
-  carts: Cart[];
-  total: number;
-  skip: number;
-  limit: number;
-}
+import { Component } from '@angular/core';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-img-slider',
@@ -39,6 +13,25 @@ export class ImgSlider {
     'https://cdn.dummyjson.com/products/images/laptops/Apple%20MacBook%20Pro%2014%20Inch%20Space%20Grey/thumbnail.png',
     'https://cdn.dummyjson.com/products/images/womens-jewellery/Green%20Oval%20Earring/thumbnail.png',
   ];
+  activeImage: string = this.images[0];
+  activeImageIndex: number = 0;
 
-  constructor() {}
+  constructor(private cd: ChangeDetectorRef) {
+    setInterval(() => {
+      this.nextImage();
+      this.cd.detectChanges();
+    }, 1000);
+  }
+
+  nextImage() {
+    this.activeImageIndex = (this.activeImageIndex + 1) % this.images.length;
+    this.activeImage = this.images[this.activeImageIndex];
+  }
+  prevImage() {
+    this.activeImageIndex = this.activeImageIndex - 1;
+    if (this.activeImageIndex < 0) {
+      this.activeImageIndex = this.images.length - 1;
+    }
+    this.activeImage = this.images[this.activeImageIndex];
+  }
 }
