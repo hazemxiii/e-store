@@ -1,6 +1,9 @@
 <div id="slider">
   <div class="image-wrap">
-    <img [src]="activeImage" />
+    <h3>{{ images[activeImageIndex].subtitle }}</h3>
+    <h1>{{ images[activeImageIndex].title }}</h1>
+    <button>{{ images[activeImageIndex].btnText }}</button>
+    <img [src]="images[activeImageIndex].imgURL" />
   </div>
   <div id="slider-btns">
     <span class="slider-btn" (click)="prevImage()"></span>
