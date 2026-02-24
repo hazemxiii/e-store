@@ -1,0 +1,14 @@
+div {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 40px;
+}
+h3 {
+  color: #d49054;
+}
+h1 {
+  color: black;
+}

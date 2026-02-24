@@ -1,0 +1,15 @@
+<div id="card" appCardDirective>
+  <div id="img-cont">
+    <img src="{{ product.imageUrl }}" alt="" appZoomDirective />
+  </div>
+  <div id="text-cont">
+    <p id="category">{{ product.categoryName }}</p>
+    <p id="rating">{{ product.rating }}</p>
+    <p id="name">{{ product.name }}</p>
+    <p id="description" (click)="expandDescription()">
+      {{ product.description | shortTextPipe: expanded }}
+    </p>
+    <h3 id="price">{{ product.price | currency }}</h3>
+    <custom-btn (onClick)="buy()" title="Buy"></custom-btn>
+  </div>
+</div>

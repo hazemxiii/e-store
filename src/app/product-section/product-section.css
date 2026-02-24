@@ -1,0 +1,13 @@
+#product-section {
+  padding: 20px;
+}
+#products-cont {
+  display: flex;
+  overflow-x: scroll;
+  gap: 10px;
+  padding: 5px;
+  min-height: 400px;
+}
+#products-cont::-webkit-scrollbar {
+  display: none;
+}

@@ -1,11 +1,12 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ImgSlider } from './img-slider/img-slider';
-import { HttpClientModule } from '@angular/common/http';
+import { AppSection } from './app-section/app-section';
+import { ProductSection } from './product-section/product-section';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, ImgSlider, HttpClientModule],
+  imports: [RouterOutlet, ImgSlider, AppSection, ProductSection],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })

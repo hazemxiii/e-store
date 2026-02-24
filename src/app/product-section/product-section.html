@@ -1,0 +1,19 @@
+<div id="product-section">
+  <div class="input-group mb-3">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Search by name..."
+      #searchName
+      (input)="filterProducts(searchName.value)"
+    />
+    <div class="input-group-append">
+      <span class="input-group-text" id="basic-addon2">Search</span>
+    </div>
+  </div>
+  <div id="products-cont">
+    @for (product of filtered; track product.id) {
+      <product-card [product]="product" />
+    }
+  </div>
+</div>
