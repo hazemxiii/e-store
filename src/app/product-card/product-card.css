@@ -30,3 +30,29 @@ img {
 #description {
   color: #a9a19c;
 }
+#input-cont {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+  overflow: hidden;
+}
+#input-cont input {
+  width: 100%;
+  outline: none;
+  border: none;
+  background-color: transparent;
+}
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+  text-align: center;
+}
+.ammount-btn {
+  background-color: black;
+  color: white;
+  border: none;
+}

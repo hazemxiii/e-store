@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Product } from '../models/product';
 import { CurrencyPipe } from '@angular/common';
 import { CardDirective } from '../card-directive';
@@ -14,6 +14,12 @@ import { CustomBtn } from '../custom-btn/custom-btn';
 })
 export class ProductCard {
   @Input() product!: Product;
+  // @Output() calcPrice = new EventEmitter<Product>();
+  @Input() increaseQty!: (product: Product) => void;
+  @Input() decreaseQty!: (product: Product) => void;
+  @Input() buyProduct!: (product: Product) => void;
+  @Input() getProductQty!: (product: Product) => number;
+  @Input() setProductQty!: (product: Product, qty: number) => void;
   expanded: boolean;
 
   constructor() {
@@ -24,8 +30,19 @@ export class ProductCard {
   expandDescription() {
     this.expanded = !this.expanded;
   }
-
-  buy() {
-    console.log('buying ' + this.product.name);
+  _increaseQty() {
+    this.increaseQty(this.product);
+  }
+  _decreaseQty() {
+    this.decreaseQty(this.product);
+  }
+  _buyProduct() {
+    this.buyProduct(this.product);
+  }
+  _getProductQuantity(): number {
+    return this.getProductQty(this.product);
+  }
+  onQtyInput(qty: number) {
+    this.setProductQty(this.product, qty);
   }
 }

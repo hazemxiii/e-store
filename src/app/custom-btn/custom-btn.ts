@@ -1,19 +1,22 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CardDirective } from '../card-directive';
+import { NgStyle } from '@angular/common';
 
 @Component({
   selector: 'custom-btn',
-  imports: [CardDirective],
+  imports: [NgStyle],
   templateUrl: './custom-btn.html',
   styleUrl: './custom-btn.css',
 })
 export class CustomBtn {
-  @Output() onClick = new EventEmitter<void>();
+  @Input() onClick!: () => void;
   @Input() title?: string;
+  @Input() color?: string;
   constructor() {
     this.title ??= 'Title';
+    this.color ??= 'black';
   }
   onItemClick() {
-    this.onClick.emit();
+    this.onClick();
   }
 }

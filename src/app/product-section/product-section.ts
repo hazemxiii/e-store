@@ -1,21 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, Output } from '@angular/core';
 import { Product } from '../models/product';
 import { ProductCard } from '../product-card/product-card';
 import { FormsModule } from '@angular/forms';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'product-section',
-  imports: [ProductCard, FormsModule],
+  imports: [ProductCard, FormsModule, CurrencyPipe],
   templateUrl: './product-section.html',
   standalone: true,
   styleUrl: './product-section.css',
 })
 export class ProductSection {
+  categories: string[];
+  filteredBeforeCat: Product[] = [];
   products: Product[];
   filtered: Product[];
-  // searchName: string;
+  cart: Map<Product, number>;
+  totalPrice: number;
   constructor() {
-    // this.searchName = '';
+    this.totalPrice = 0;
+    this.cart = new Map();
     this.products = [
       new Product(
         1,
@@ -23,7 +28,7 @@ export class ProductSection {
         'Electronics',
         'Ergonomic wireless mouse with USB receiver',
         29.99,
-        50,
+        2,
         4.5,
         'https://example.com/images/mouse.jpg',
       ),
@@ -119,9 +124,75 @@ export class ProductSection {
       ),
     ];
     this.filtered = [...this.products];
+    this.categories = [];
+    for (let p of this.products) {
+      if (!this.categories.includes(p.categoryName)) {
+        this.categories.push(p.categoryName);
+      }
+    }
   }
 
-  filterProducts(searchName: string) {
-    this.filtered = this.products.filter((pr) => pr.name.toLowerCase().includes(searchName));
+  filterProducts(searchName: string, category: string, priceRange: string[]) {
+    this.filtered = [];
+    for (let p of this.products) {
+      if (!p.name.toLowerCase().includes(searchName)) {
+        continue;
+      }
+      if (p.categoryName != category && category != 'All') {
+        continue;
+      }
+      console.log(priceRange);
+      if (priceRange[0] != '' && p.price < +priceRange[0]) {
+        continue;
+      }
+      if (priceRange[1] != '' && p.price > +priceRange[1]) {
+        continue;
+      }
+      this.filtered.push(p);
+    }
+    // this.filtered = this.products.filter((pr) => pr.name.toLowerCase().includes(searchName));
   }
+
+  increaseQty(product: Product): undefined {
+    if (!this.cart.has(product)) {
+      this.cart.set(product, 0);
+    }
+    if (this.cart.get(product)! < product.quantityLeft) {
+      this.totalPrice += product.price;
+      this.cart.set(product, this.cart.get(product)! + 1);
+    }
+  }
+  decreaseQty(product: Product): undefined {
+    if (!this.cart.has(product)) {
+      this.cart.set(product, 0);
+    }
+    if (this.cart.get(product)! > 0) {
+      this.totalPrice -= product.price;
+      this.cart.set(product, this.cart.get(product)! - 1);
+    }
+  }
+  buyProduct(product: Product): undefined {
+    if (this.cart.has(product)) {
+      product.reduceStock(this.cart.get(product)!);
+      this.totalPrice -= this.cart.get(product)! * product.price;
+      this.cart.delete(product);
+    }
+  }
+  getProductQty(product: Product): number {
+    return this.cart.get(product) ?? 0;
+  }
+  setProductQty(product: Product, qty: number): undefined {
+    let old: number = this.cart.get(product) ?? 0;
+    let newV: number = 0;
+    if (qty > 0 && qty <= product.quantityLeft) {
+      newV = qty;
+    } else if (qty > product.quantityLeft) {
+      newV = product.quantityLeft;
+    }
+    this.cart.set(product, newV);
+    this.totalPrice += (newV - old) * product.price;
+  }
+  // filterByCategory(category: string): undefined {
+  //   for(category)
+  // }
 }

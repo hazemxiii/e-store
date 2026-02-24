@@ -5,15 +5,52 @@
       class="form-control"
       placeholder="Search by name..."
       #searchName
-      (input)="filterProducts(searchName.value)"
+      (input)="
+        filterProducts(searchName.value, byCategory.value, [priceInMin.value, priceInMax.value])
+      "
     />
     <div class="input-group-append">
       <span class="input-group-text" id="basic-addon2">Search</span>
     </div>
   </div>
+  <div id="filters">
+    <select
+      #byCategory
+      (change)="
+        filterProducts(searchName.value, byCategory.value, [priceInMin.value, priceInMax.value])
+      "
+    >
+      <option value="All">All</option>
+      @for (cat of categories; track cat) {
+        <option value="{{ cat }}">{{ cat }}</option>
+      }
+    </select>
+    <input
+      type="text"
+      #priceInMin
+      (input)="
+        filterProducts(searchName.value, byCategory.value, [priceInMin.value, priceInMax.value])
+      "
+    />
+    <input
+      type="text"
+      #priceInMax
+      (input)="
+        filterProducts(searchName.value, byCategory.value, [priceInMin.value, priceInMax.value])
+      "
+    />
+  </div>
+  <h1>{{ totalPrice | currency }}</h1>
   <div id="products-cont">
     @for (product of filtered; track product.id) {
-      <product-card [product]="product" />
+      <product-card
+        [buyProduct]="buyProduct.bind(this)"
+        [getProductQty]="getProductQty.bind(this)"
+        [setProductQty]="setProductQty.bind(this)"
+        [product]="product"
+        [decreaseQty]="decreaseQty.bind(this)"
+        [increaseQty]="increaseQty.bind(this)"
+      />
     }
   </div>
 </div>

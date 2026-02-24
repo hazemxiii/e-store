@@ -10,6 +10,25 @@
       {{ product.description | shortTextPipe: expanded }}
     </p>
     <h3 id="price">{{ product.price | currency }}</h3>
-    <custom-btn (onClick)="buy()" title="Buy"></custom-btn>
+    @if (product.isInStock()) {
+      <p id="qty">Left {{ product.quantityLeft }}</p>
+    } @else {
+      <p id="qty">OUT OF STOCK</p>
+    }
+    <div id="input-cont">
+      <button class="ammount-btn" (click)="_decreaseQty()">-</button>
+      <!-- <custom-btn color="black" [onClick]="_decreaseQty.bind(this)" title="-"></custom-btn> -->
+      <input
+        type="number"
+        min="1"
+        value="{{ _getProductQuantity() }}"
+        max="{{ product.quantityLeft }}"
+        (input)="onQtyInput(+qtyIn.value)"
+        #qtyIn
+      />
+      <button class="ammount-btn" (click)="_increaseQty()">+</button>
+      <!-- <custom-btn color="black" [onClick]="_increaseQty.bind(this)" title="+"></custom-btn> -->
+    </div>
+    <custom-btn color="black" [onClick]="_buyProduct.bind(this)" title="Buy"></custom-btn>
   </div>
 </div>
