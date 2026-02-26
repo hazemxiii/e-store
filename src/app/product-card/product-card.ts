@@ -5,6 +5,7 @@ import { CardDirective } from '../card-directive';
 import { ShortTextPipePipe } from '../short-text-pipe-pipe';
 import { ZoomDirective } from '../zoom-directive';
 import { CustomBtn } from '../custom-btn/custom-btn';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'product-card',
@@ -22,9 +23,16 @@ export class ProductCard {
   @Input() setProductQty!: (product: Product, qty: number) => void;
   expanded: boolean;
 
-  constructor() {
+  constructor(private router: Router) {
     this.expanded = false;
     this.product ??= new Product(0, 'Name', 'Category', 'Description', 0, 0, 0, '');
+  }
+
+  goToDetails() {
+    this.router.navigate(['/product-details', this.product.id]);
+  }
+  goToEdit() {
+    this.router.navigate(['/add_product', this.product.id]);
   }
 
   expandDescription() {

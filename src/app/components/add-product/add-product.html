@@ -1,0 +1,93 @@
+<form #productForm="ngForm" (ngSubmit)="onSubmit(productForm)" class="container mt-4">
+  <div class="card shadow p-4">
+    <h3 class="mb-4 text-center">Add Product</h3>
+
+    <div class="mb-3">
+      <label class="form-label">ID</label>
+      <input type="number" name="id" class="form-control" [(ngModel)]="product.id" required />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Name</label>
+      <input
+        type="text"
+        name="name"
+        class="form-control"
+        [(ngModel)]="product.name"
+        required
+        #name="ngModel"
+      />
+      @if (name.invalid && name.touched) {
+        <div class="text-danger mt-1">Name is required</div>
+      }
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Category</label>
+      <input
+        type="text"
+        name="categoryName"
+        class="form-control"
+        [(ngModel)]="product.categoryName"
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Description</label>
+      <textarea
+        name="description"
+        class="form-control"
+        rows="3"
+        [(ngModel)]="product.description"
+      ></textarea>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Price</label>
+      <input
+        type="number"
+        name="price"
+        class="form-control"
+        [(ngModel)]="product.price"
+        required
+        min="0"
+      />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Quantity Left</label>
+      <input
+        type="number"
+        name="quantityLeft"
+        class="form-control"
+        [(ngModel)]="product.quantityLeft"
+        required
+        min="0"
+      />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Rating (0-5)</label>
+      <input
+        type="number"
+        name="rating"
+        class="form-control"
+        [(ngModel)]="product.rating"
+        min="0"
+        max="5"
+      />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Image URL</label>
+      <input type="url" name="imageUrl" class="form-control" [(ngModel)]="product.imageUrl" />
+    </div>
+
+    <div class="d-grid">
+      <button type="submit" class="btn btn-primary" [disabled]="productForm.invalid">
+        Save Product
+      </button>
+    </div>
+  </div>
+</form>

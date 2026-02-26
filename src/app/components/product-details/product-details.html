@@ -1,13 +1,14 @@
-<div id="card" appCardDirective>
+<div id="row">
   <div id="img-cont">
-    <img src="{{ product.imageUrl }}" alt="" appZoomDirective />
+    <img src="https://images.unsplash.com/photo-1612198188060-c7c2a3b66eae?w=600&q=80" alt="" />
+    <!-- <img src="{{ product.imageUrl }}" alt="" /> -->
   </div>
-  <div id="text-cont">
+  <div id="details-cont">
     <p id="category">{{ product.categoryName }}</p>
     <p id="rating">{{ product.rating }}</p>
     <p id="name">{{ product.name }}</p>
-    <p id="description" (click)="expandDescription()">
-      {{ product.description | shortTextPipe: expanded }}
+    <p id="description">
+      {{ product.description }}
     </p>
     <h3 id="price">{{ product.price | currency }}</h3>
     @if (product.isInStock()) {
@@ -15,9 +16,8 @@
     } @else {
       <p id="qty">OUT OF STOCK</p>
     }
-    <div id="input-cont">
+    <!-- <div id="input-cont">
       <button class="ammount-btn" (click)="_decreaseQty()">-</button>
-      <!-- <custom-btn color="black" [onClick]="_decreaseQty.bind(this)" title="-"></custom-btn> -->
       <input
         type="number"
         min="1"
@@ -27,10 +27,8 @@
         #qtyIn
       />
       <button class="ammount-btn" (click)="_increaseQty()">+</button>
-      <!-- <custom-btn color="black" [onClick]="_increaseQty.bind(this)" title="+"></custom-btn> -->
     </div>
-    <custom-btn color="black" [onClick]="_buyProduct.bind(this)" title="Buy"></custom-btn>
-    <custom-btn color="black" [onClick]="goToEdit.bind(this)" title="Edit"></custom-btn>
-    <custom-btn color="black" [onClick]="goToDetails.bind(this)" title="Details"></custom-btn>
+    <custom-btn color="black" [onClick]="_buyProduct.bind(this)" title="Buy"></custom-btn> -->
+    <custom-btn color="red" [onClick]="deleteProduct.bind(this)" title="Delete"></custom-btn>
   </div>
 </div>

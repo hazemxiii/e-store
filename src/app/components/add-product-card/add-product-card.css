@@ -1,0 +1,22 @@
+#card {
+  border: 1px dashed #8a8075;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+  min-width: 200px;
+  border-radius: 5px;
+  background-color: #f5f3ef;
+  text-decoration: none;
+  color: #8a8075;
+  transition-duration: 0.3s;
+}
+#plus-sign {
+  font-size: 50px;
+  font-weight: bold;
+}
+#card:hover {
+  color: #d49054;
+  border-color: #d49054;
+}
