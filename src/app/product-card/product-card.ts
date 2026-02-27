@@ -6,7 +6,8 @@ import { ShortTextPipePipe } from '../short-text-pipe-pipe';
 import { ZoomDirective } from '../zoom-directive';
 import { CustomBtn } from '../custom-btn/custom-btn';
 import { Router } from '@angular/router';
-
+import { ProductsData } from '../services/products-data';
+import { AuthService } from '../services/auth-service';
 @Component({
   selector: 'product-card',
   imports: [CurrencyPipe, CardDirective, ShortTextPipePipe, ZoomDirective, CustomBtn],
@@ -15,7 +16,6 @@ import { Router } from '@angular/router';
 })
 export class ProductCard {
   @Input() product!: Product;
-  // @Output() calcPrice = new EventEmitter<Product>();
   @Input() increaseQty!: (product: Product) => void;
   @Input() decreaseQty!: (product: Product) => void;
   @Input() buyProduct!: (product: Product) => void;
@@ -23,7 +23,11 @@ export class ProductCard {
   @Input() setProductQty!: (product: Product, qty: number) => void;
   expanded: boolean;
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    public productsData: ProductsData,
+    public auth: AuthService,
+  ) {
     this.expanded = false;
     this.product ??= new Product(0, 'Name', 'Category', 'Description', 0, 0, 0, '');
   }
@@ -38,19 +42,20 @@ export class ProductCard {
   expandDescription() {
     this.expanded = !this.expanded;
   }
-  _increaseQty() {
-    this.increaseQty(this.product);
-  }
-  _decreaseQty() {
-    this.decreaseQty(this.product);
-  }
+  // _increaseQty() {
+  //   this.increaseQty(this.product);
+  // }
+  // _decreaseQty() {
+  //   this.decreaseQty(this.product);
+  // }
   _buyProduct() {
-    this.buyProduct(this.product);
+    this.productsData.buyProduct(this.product);
   }
-  _getProductQuantity(): number {
-    return this.getProductQty(this.product);
-  }
+  // _getProductQuantity(): number {
+  //   return this.getProductQty(this.product);
+  // }
   onQtyInput(qty: number) {
-    this.setProductQty(this.product, qty);
+    // this.setProductQty(this.product, qty);
+    this.productsData.setProductQty(this.product, qty);
   }
 }

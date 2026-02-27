@@ -4,7 +4,7 @@ import { ProductsData } from '../../services/products-data';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CurrencyPipe } from '@angular/common';
 import { CustomBtn } from '../../custom-btn/custom-btn';
-
+import { AuthService } from '../../services/auth-service';
 @Component({
   selector: 'app-product-details',
   imports: [CurrencyPipe, CustomBtn],
@@ -15,9 +15,10 @@ import { CustomBtn } from '../../custom-btn/custom-btn';
 export class ProductDetails {
   product!: Product;
   constructor(
-    private productsData: ProductsData,
+    public productsData: ProductsData,
     private route: ActivatedRoute,
     private router: Router,
+    public auth: AuthService,
   ) {}
   ngOnInit() {
     let product: Product | undefined = this.productsData.getProductByID(
@@ -33,5 +34,25 @@ export class ProductDetails {
   deleteProduct() {
     this.productsData.deleteProduct(this.product);
     this.router.navigate(['']);
+  }
+
+  _increaseQty() {
+    this.productsData.increaseQty(this.product);
+  }
+
+  _decreaseQty() {
+    this.productsData.decreaseQty(this.product);
+  }
+
+  _buyProduct() {
+    this.productsData.buyProduct(this.product);
+  }
+
+  onQtyInput(qty: number) {
+    this.productsData.setProductQty(this.product, qty);
+  }
+
+  goToEdit() {
+    this.router.navigate(['/add_product', this.product.id]);
   }
 }

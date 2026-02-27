@@ -3,6 +3,11 @@
   height: 100vh;
   position: relative;
 }
+#login-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
 .image-wrap {
   height: 100%;
   width: 100%;

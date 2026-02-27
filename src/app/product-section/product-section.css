@@ -1,6 +1,29 @@
 #product-section {
   padding: 20px;
 }
+select {
+  background-color: #f5f3ef;
+  color: black;
+  padding: 5px;
+  border: 1px solid #e2dcd5;
+  outline: none;
+  border-radius: 5px;
+}
+option {
+  background-color: #faf8f5;
+  color: black;
+  border: none;
+  outline: none;
+}
+option:hover {
+  background-color: #e2dcd5;
+}
+#price-select {
+  display: flex;
+  gap: 10px;
+  margin-top: 5px;
+  justify-content: flex-start;
+}
 #products-cont {
   display: flex;
   overflow-x: scroll;

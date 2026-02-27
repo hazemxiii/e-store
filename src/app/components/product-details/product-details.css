@@ -18,6 +18,9 @@ img {
 }
 #details-cont {
   width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
 }
 #category {
   color: #d49054;
@@ -30,4 +33,35 @@ img {
 }
 #description {
   color: #a9a19c;
+}
+#input-cont {
+  display: inline-flex;
+  padding: 0px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e2dcd5;
+  border-radius: 5px;
+  overflow: hidden;
+  width: fit-content;
+}
+#input-cont input {
+  width: 100%;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  text-align: center;
+  display: inline;
+  width: 50px;
+}
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+  text-align: center;
+}
+.ammount-btn {
+  background-color: #f5f3ef;
+  color: black;
+  border: none;
+  width: 20px;
 }

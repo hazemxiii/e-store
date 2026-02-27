@@ -1,0 +1,138 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "name": "Mouse",
+      "categoryName": "Electronics",
+      "description": "Ergonomic wireless mouse with USB receiver",
+      "price": 30,
+      "quantityLeft": 2,
+      "rating": 4.5,
+      "imageUrl": "https://example.com/images/mouse.jpg"
+    },
+    {
+      "id": "2",
+      "name": "Mechanical Keyboard",
+      "categoryName": "Electronics",
+      "description": "RGB backlit mechanical keyboard with blue switches",
+      "price": 79.99,
+      "rating": 4.7,
+      "quantityLeft": 30,
+      "imageUrl": "https://example.com/images/keyboard.jpg"
+    },
+    {
+      "id": "3",
+      "name": "Gaming Headset",
+      "categoryName": "Electronics",
+      "description": "Surround sound gaming headset with noise-canceling mic",
+      "price": 59.99,
+      "rating": 4.4,
+      "quantityLeft": 25,
+      "imageUrl": "https://example.com/images/headset.jpg"
+    },
+    {
+      "id": "4",
+      "name": "Smart Watch",
+      "categoryName": "Wearables",
+      "description": "Fitness tracking smart watch with heart rate monitor",
+      "price": 129.99,
+      "rating": 4.3,
+      "quantityLeft": 15,
+      "imageUrl": "https://example.com/images/smartwatch.jpg"
+    },
+    {
+      "id": "5",
+      "name": "Bluetooth Speaker",
+      "categoryName": "Audio",
+      "description": "Portable waterproof Bluetooth speaker",
+      "price": 45.99,
+      "rating": 4.6,
+      "quantityLeft": 40,
+      "imageUrl": "https://example.com/images/speaker.jpg"
+    },
+    {
+      "id": "6",
+      "name": "Laptop Stand",
+      "categoryName": "Accessories",
+      "description": "Adjustable aluminum laptop stand for desks",
+      "price": 34.99,
+      "rating": 4.5,
+      "quantityLeft": 60,
+      "imageUrl": "https://example.com/images/laptop-stand.jpg"
+    },
+    {
+      "id": "7",
+      "name": "USB-C Hub",
+      "categoryName": "Accessories",
+      "description": "Multi-port USB-C hub with HDMI and USB 3.0",
+      "price": 39.99,
+      "rating": 4.2,
+      "quantityLeft": 35,
+      "imageUrl": "https://example.com/images/usb-hub.jpg"
+    },
+    {
+      "id": "8",
+      "name": "External SSD 1TB",
+      "categoryName": "Storage",
+      "description": "High-speed portable external SSD 1TB",
+      "price": 149.99,
+      "rating": 4.8,
+      "quantityLeft": 20,
+      "imageUrl": "https://example.com/images/ssd.jpg"
+    },
+    {
+      "id": "9",
+      "name": "4K Monitor",
+      "categoryName": "Electronics",
+      "description": "27-inch 4K UHD monitor with HDR support",
+      "price": 329.99,
+      "rating": 4.7,
+      "quantityLeft": 10,
+      "imageUrl": "https://example.com/images/monitor.jpg"
+    },
+    {
+      "id": "10",
+      "name": "Webcam HD",
+      "categoryName": "Electronics",
+      "description": "1080p HD webcam with built-in microphone",
+      "price": 49.99,
+      "rating": 4.3,
+      "quantityLeft": 45,
+      "imageUrl": "https://example.com/images/webcam.jpg"
+    },
+    {
+      "id": "11",
+      "name": "hehe",
+      "categoryName": "Electronics",
+      "description": "",
+      "price": 0,
+      "quantityLeft": 0,
+      "rating": 0,
+      "imageUrl": ""
+    },
+    {
+      "id": "12",
+      "name": "Hazem",
+      "categoryName": "werwer",
+      "description": "",
+      "price": 0,
+      "quantityLeft": 0,
+      "rating": 0,
+      "imageUrl": ""
+    }
+  ],
+  "users": [
+    {
+      "id": "5776",
+      "username": "hazem",
+      "password": "1234",
+      "role": "admin"
+    },
+    {
+      "id": "45f3",
+      "username": "hazemu",
+      "password": "1234",
+      "role": "guest"
+    }
+  ]
+}

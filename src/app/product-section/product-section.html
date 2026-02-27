@@ -1,4 +1,4 @@
-<div id="product-section">
+<div id="product-section" [ngStyle]="{ backgroundColor: getTheme() === 'dark' ? '#000' : '#fff' }">
   <div class="input-group mb-3">
     <input
       type="text"
@@ -25,7 +25,7 @@
         <option value="{{ cat }}">{{ cat }}</option>
       }
     </select>
-    <input
+    <!-- <input
       type="text"
       #priceInMin
       (input)="
@@ -38,19 +38,56 @@
       (input)="
         filterProducts(searchName.value, byCategory.value, [priceInMin.value, priceInMax.value])
       "
-    />
+    /> -->
+    <div id="price-select">
+      <div class="input-group mb-3">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Min Price"
+          aria-label="Min Price"
+          #priceInMin
+          (input)="
+            filterProducts(searchName.value, byCategory.value, [priceInMin.value, priceInMax.value])
+          "
+          aria-describedby="basic-addon2"
+        />
+        <div class="input-group-append">
+          <span class="input-group-text" id="basic-addon2">Min Price</span>
+        </div>
+      </div>
+
+      <div class="input-group mb-3">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Max Price"
+          aria-label="Max Price"
+          aria-describedby="basic-addon2"
+          #priceInMax
+          (input)="
+            filterProducts(searchName.value, byCategory.value, [priceInMin.value, priceInMax.value])
+          "
+        />
+        <div class="input-group-append">
+          <span class="input-group-text" id="basic-addon2">Max Price</span>
+        </div>
+      </div>
+    </div>
   </div>
-  <h1>{{ totalPrice | currency }}</h1>
+  <h1>{{ productsData.getTotalPrice() | currency }}</h1>
   <div id="products-cont">
-    <app-add-product-card />
+    @if (auth.getRole() == 'admin') {
+      <app-add-product-card />
+    }
     @for (product of filtered; track product.id) {
       <product-card
-        [buyProduct]="buyProduct.bind(this)"
-        [getProductQty]="getProductQty.bind(this)"
-        [setProductQty]="setProductQty.bind(this)"
+        [buyProduct]="productsData.buyProduct.bind(this)"
+        [getProductQty]="productsData.getProductQty.bind(this)"
+        [setProductQty]="productsData.setProductQty.bind(this)"
         [product]="product"
-        [decreaseQty]="decreaseQty.bind(this)"
-        [increaseQty]="increaseQty.bind(this)"
+        [decreaseQty]="productsData.decreaseQty.bind(this)"
+        [increaseQty]="productsData.increaseQty.bind(this)"
       />
     }
   </div>

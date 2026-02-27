@@ -16,19 +16,38 @@
     } @else {
       <p id="qty">OUT OF STOCK</p>
     }
-    <!-- <div id="input-cont">
-      <button class="ammount-btn" (click)="_decreaseQty()">-</button>
+    <div id="input-cont">
+      <button class="ammount-btn" (click)="productsData.decreaseQty(product)">-</button>
       <input
         type="number"
         min="1"
-        value="{{ _getProductQuantity() }}"
+        value="{{ productsData.getProductQty(product) }}"
         max="{{ product.quantityLeft }}"
         (input)="onQtyInput(+qtyIn.value)"
         #qtyIn
       />
       <button class="ammount-btn" (click)="_increaseQty()">+</button>
     </div>
-    <custom-btn color="black" [onClick]="_buyProduct.bind(this)" title="Buy"></custom-btn> -->
-    <custom-btn color="red" [onClick]="deleteProduct.bind(this)" title="Delete"></custom-btn>
+    <custom-btn
+      icon="fa fa-shopping-cart"
+      color="black"
+      [onClick]="_buyProduct.bind(this)"
+      title="Buy"
+    ></custom-btn>
+    @if (auth.getRole() == 'admin') {
+      <custom-btn
+        icon="fa fa-edit"
+        color="black"
+        [onClick]="goToEdit.bind(this)"
+        title="Edit"
+      ></custom-btn>
+
+      <custom-btn
+        icon="fa fa-trash"
+        color="red"
+        [onClick]="deleteProduct.bind(this)"
+        title="Delete"
+      ></custom-btn>
+    }
   </div>
 </div>

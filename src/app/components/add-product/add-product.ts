@@ -25,8 +25,11 @@ export class AddProduct {
   }
   onSubmit(form: NgForm) {
     if (this.product.id == 0) {
-      this.product.id = this.productsData.getData().length + 1;
-      this.productsData.addProduct(this.product);
+      // this.product.id = this.productsData.getData().length + 1;
+      this.productsData.getData().subscribe((data) => {
+        this.product.id = data.length + 1;
+        this.productsData.addProduct(this.product);
+      });
     } else {
       this.productsData.updateProduct(this.product);
     }

@@ -1,0 +1,11 @@
+* {
+  padding: 0px;
+  margin: 0px;
+}
+
+body {
+  background-color: #fff;
+}
+body.dark {
+  background-color: #000;
+}

@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Product } from '../models/product';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -107,9 +109,28 @@ export class ProductsData {
       'https://example.com/images/webcam.jpg',
     ),
   ];
-  getData(): Product[] {
-    return this.products;
+  private totalPrice: number;
+  private url: string = 'http://localhost:3000';
+  private productsURL: string = this.url + '/products';
+  private cart: Map<Product, number>;
+  constructor(private http: HttpClient) {
+    this.cart = new Map();
+    this.totalPrice = 0;
   }
+
+  getCart(): Map<Product, number> {
+    return this.cart;
+  }
+  getTotalPrice(): number {
+    return this.totalPrice;
+  }
+
+  getData(): Observable<Product[]> {
+    return this.http.get<Product[]>(this.productsURL);
+  }
+  // getData(): Product[] {
+  //   return this.products;
+  // }
   getProductByID(id: number): Product | undefined {
     return this.products.find((p) => p.id === id);
   }
@@ -119,9 +140,59 @@ export class ProductsData {
       .concat(this.products.slice(this.products.indexOf(pr) + 1));
   }
   addProduct(pr: Product) {
-    this.products.push(pr);
+    // this.products.push(pr);
+    this.http.post(this.productsURL, pr).subscribe((data) => {
+      // console.log(data);
+    });
+    // console.log(pr);
   }
   updateProduct(pr: Product) {
-    this.products[this.products.indexOf(pr)] = pr;
+    // this.products[this.products.indexOf(pr)] = pr;
+    this.http.put(this.productsURL + '/' + pr.id, pr).subscribe((data) => {
+      // console.log(data);
+    });
+  }
+
+  increaseQty(product: Product): undefined {
+    if (!this.cart.has(product)) {
+      this.cart.set(product, 0);
+    }
+    if (this.cart.get(product)! < product.quantityLeft) {
+      this.totalPrice += product.price;
+      this.cart.set(product, this.cart.get(product)! + 1);
+    }
+  }
+  decreaseQty(product: Product): undefined {
+    if (!this.cart.has(product)) {
+      this.cart.set(product, 0);
+    }
+    if (this.cart.get(product)! > 0) {
+      this.totalPrice -= product.price;
+      this.cart.set(product, this.cart.get(product)! - 1);
+    }
+  }
+  buyProduct(product: Product): undefined {
+    if (this.cart.has(product)) {
+      product.reduceStock(this.cart.get(product)!);
+      this.http.put(this.productsURL + '/' + product.id, product).subscribe((data) => {
+        // console.log(data);
+      });
+      this.totalPrice -= this.cart.get(product)! * product.price;
+      this.cart.delete(product);
+    }
+  }
+  getProductQty(product: Product): number {
+    return this.cart.get(product) ?? 0;
+  }
+  setProductQty(product: Product, qty: number): undefined {
+    let old: number = this.cart.get(product) ?? 0;
+    let newV: number = 0;
+    if (qty > 0 && qty <= product.quantityLeft) {
+      newV = qty;
+    } else if (qty > product.quantityLeft) {
+      newV = product.quantityLeft;
+    }
+    this.cart.set(product, newV);
+    this.totalPrice += (newV - old) * product.price;
   }
 }

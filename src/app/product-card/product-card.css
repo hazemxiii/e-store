@@ -1,13 +1,21 @@
 #card {
-  min-width: 200px;
+  width: 250px;
   /* padding: 20px; */
   overflow: hidden;
   background-color: #f5f3ef;
   transition-duration: 0.3s;
   height: 100%;
+  border: 1px solid #e2dcd5;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 10px;
+}
+#card-cont {
+  height: 100%;
 }
 #text-cont {
-  padding: 10px;
+  padding: 10px 20px;
 }
 #img-cont {
   height: 200px;
@@ -30,20 +38,35 @@ img {
   height: 100%;
   transition-duration: 0.3s;
 }
-#input-cont {
+.row {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
   margin-bottom: 10px;
-  border: 1px solid black;
+}
+#input-cont {
+  display: inline-flex;
+  padding: 0px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e2dcd5;
   border-radius: 5px;
   overflow: hidden;
+  width: fit-content;
 }
 #input-cont input {
   width: 100%;
   outline: none;
   border: none;
   background-color: transparent;
+  text-align: center;
+  display: inline;
+  width: 50px;
+}
+#price {
+  width: fit-content;
+  margin: 0px;
 }
 input[type='number']::-webkit-outer-spin-button,
 input[type='number']::-webkit-inner-spin-button {
@@ -52,7 +75,17 @@ input[type='number']::-webkit-inner-spin-button {
   text-align: center;
 }
 .ammount-btn {
-  background-color: black;
-  color: white;
+  background-color: #f5f3ef;
+  color: black;
   border: none;
+  width: 20px;
+}
+
+#controls {
+  max-width: 200px;
+  margin: auto;
+  display: flex;
+  gap: 5px;
+  width: 100%;
+  flex-direction: column;
 }

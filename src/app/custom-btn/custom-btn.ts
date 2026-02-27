@@ -1,5 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { CardDirective } from '../card-directive';
+import { Component, Input } from '@angular/core';
 import { NgStyle } from '@angular/common';
 
 @Component({
@@ -12,9 +11,11 @@ export class CustomBtn {
   @Input() onClick!: () => void;
   @Input() title?: string;
   @Input() color?: string;
+  @Input() icon?: string;
   constructor() {
     this.title ??= 'Title';
     this.color ??= 'black';
+    this.icon ??= '';
   }
   onItemClick() {
     this.onClick();

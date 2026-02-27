@@ -1,0 +1,22 @@
+<a routerLink="/register">Register</a>
+<div class="container mt-5">
+  <div class="card p-4">
+    <h3>Login</h3>
+
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <div class="mb-3">
+        <label class="form-label">Username</label>
+        <input class="form-control" formControlName="username" />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input type="password" class="form-control" formControlName="password" />
+      </div>
+
+      <div class="text-danger mb-2">{{ error }}</div>
+
+      <button class="btn btn-success w-100">Login</button>
+    </form>
+  </div>
+</div>
